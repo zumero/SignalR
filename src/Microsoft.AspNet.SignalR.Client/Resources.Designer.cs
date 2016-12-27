@@ -40,7 +40,7 @@ namespace Microsoft.AspNet.SignalR.Client {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-#if NETFX_CORE
+#if NETFX_CORE || PROFILE151
                     var assembly = typeof(Resources).GetTypeInfo().Assembly;
 #else
                     var assembly = typeof(Resources).Assembly;

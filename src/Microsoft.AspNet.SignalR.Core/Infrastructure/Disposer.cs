@@ -36,7 +36,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
             }
             else
             {
-#if !PORTABLE && !NETFX_CORE
+#if !PORTABLE && !NETFX_CORE && !PROFILE151
                 // Set has been called multiple times, fail
                 Debug.Fail("Multiple calls to Disposer.Set(IDisposable) without calling Disposer.Dispose()");
 #endif

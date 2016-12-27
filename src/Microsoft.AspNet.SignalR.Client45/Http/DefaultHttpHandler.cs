@@ -2,14 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-#if !NETFX_CORE && !PORTABLE
+#if !NETFX_CORE && !PORTABLE && !PROFILE151
 using System.Security.Cryptography.X509Certificates;
 #endif
 using System.Net.Http;
 
 namespace Microsoft.AspNet.SignalR.Client.Http
 {
-#if !NETFX_CORE && !PORTABLE && !__ANDROID__ && !IOS
+#if !NETFX_CORE && !PORTABLE && !__ANDROID__ && !IOS && !PROFILE151
     public class DefaultHttpHandler : WebRequestHandler
 #else
     public class DefaultHttpHandler : HttpClientHandler

@@ -935,12 +935,14 @@ namespace Microsoft.AspNet.SignalR.Client
             {
 #if NETFX_CORE
                 _assemblyVersion = new Version("2.2.1");
+#elif PROFILE151
+                _assemblyVersion = new AssemblyName(typeof(Connection).GetTypeInfo().Assembly.FullName).Version;
 #else
                 _assemblyVersion = new AssemblyName(typeof(Connection).Assembly.FullName).Version;
 #endif
             }
 
-#if NETFX_CORE || PORTABLE
+#if NETFX_CORE || PORTABLE || PROFILE151
             return String.Format(CultureInfo.InvariantCulture, "{0}/{1} ({2})", client, _assemblyVersion, "Unknown OS");
 #else
             return String.Format(CultureInfo.InvariantCulture, "{0}/{1} ({2})", client, _assemblyVersion, Environment.OSVersion);
@@ -987,14 +989,14 @@ namespace Microsoft.AspNet.SignalR.Client
         /// </summary>
         private class DebugTextWriter : TextWriter
         {
-#if NETFX_CORE || PORTABLE
+#if NETFX_CORE || PORTABLE || PROFILE151
             private readonly StringBuilder _buffer;
 #endif
 
             public DebugTextWriter()
                 : base(CultureInfo.InvariantCulture)
             {
-#if NETFX_CORE || PORTABLE
+#if NETFX_CORE || PORTABLE || PROFILE151
                 _buffer = new StringBuilder();
 #endif
             }
@@ -1004,7 +1006,7 @@ namespace Microsoft.AspNet.SignalR.Client
                 Debug.WriteLine(value);
             }
 
-#if NETFX_CORE || PORTABLE
+#if NETFX_CORE || PORTABLE || PROFILE151
             public override void Write(char value)
             {
                 lock (_buffer)
@@ -1026,7 +1028,7 @@ namespace Microsoft.AspNet.SignalR.Client
                 get { return Encoding.UTF8; }
             }
 
-#if NETFX_CORE || PORTABLE
+#if NETFX_CORE || PORTABLE || PROFILE151
             public override void Flush()
             {
                 Debug.WriteLine(_buffer.ToString());
